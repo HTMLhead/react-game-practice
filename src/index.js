@@ -31,7 +31,26 @@ class Game extends React.Component {
     };
   }
 
-  
+  renderSoom(i, classList) {
+    return (
+      <MakeSoom
+        key={i}
+        className={classList}
+        onClick={() => this.clickHandler(i)}
+      />
+    );
+  }
+
+  renderSquare(i, classList) {
+    if(this.state.ranArr[i] === true) classList += ' square-click-ani';
+    return (
+      <MakeSquare
+        key={i}
+        className={classList}
+        onClick={() => this.clickHandler(i)}
+      />
+    );
+  }
 
   render() {
     let classList = "square"
