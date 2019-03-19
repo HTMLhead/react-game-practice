@@ -24,4 +24,29 @@ function makeSoom(props) {
   return element
 }
 
+class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {addClass: false}
+  }
+
+  addClass() {
+    this.setState({addClass: true})
+  }
+
+  render() {
+    let classList = ['square']
+    if(this.state.addClass) {
+      classList = classList.concat(['square-click-ani']);
+    }
+    return(
+      <div className={classList.join(' ')} onClick={this.addClass.bind(this)}></div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+)
 
