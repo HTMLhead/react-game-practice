@@ -26,38 +26,30 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //매직넘버 처리 어떻게? 전역변수로?
+      //매직넘버 어떻게 처리?
       ranArr: makeRanArr(7),
     };
   }
 
-  addClass() {
-    this.setState({ addClass: true });
-  }
+  
 
-  renderSquare(i, className) {
+  render() {
+    let classList = "square"
+    const title = `숨을 찾으면 당첨!`;
     return (
-      <MakeSquare
-        key={i}
-                className={classList.join(' ')}
-                onClick={() => this.addClass}
-              />
-            );
-  }
-
-  renderSoom(i, className) {
-    return (
-              <MakeSquare
-                key={i}
-        className={className.join(' ')}
-        onClick={() => this.addClass(i)}
-      />
-    );
-  }
-        })}
+      <div className="title">
+        {title}
+        <div className="game-board">
+          {this.state.ranArr.map((bool, i) => {
+            if (bool === 'soom') {
+              return this.renderSoom(i, classList);
+            } else {
+              return this.renderSquare(i, classList);
+            }
+          })}
+        </div>
       </div>
     );
   }
 }
-
 ReactDOM.render(<Game />, document.getElementById('root'));
