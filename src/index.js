@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function makeRanBoolArr(num) {
+function makeRanArr(num) {
   const randomArr = Array(num).fill(false);
   randomArr[Math.floor(Math.random() * num)] = 'soom';
   return randomArr;
@@ -26,8 +26,8 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addClass: false,
-      ranArr: makeRanBoolArr(7),
+      //매직넘버 처리 어떻게? 전역변수로?
+      ranArr: makeRanArr(7),
     };
   }
 
@@ -35,31 +35,25 @@ class Game extends React.Component {
     this.setState({ addClass: true });
   }
 
-  render() {
-    let classList = ['square'];
-    if (this.state.addClass) {
-      classList = classList.concat(['square-click-ani']);
-    }
+  renderSquare(i, className) {
     return (
-      <div className="game-board">
-        {this.state.ranArr.map((bool, i) => {
-          if (bool === 'soom') {
-            return (
-              <MakeSoom
-                key={i}
+      <MakeSquare
+        key={i}
                 className={classList.join(' ')}
                 onClick={() => this.addClass}
               />
             );
-          } else {
-            return (
+  }
+
+  renderSoom(i, className) {
+    return (
               <MakeSquare
                 key={i}
-                className={classList.join(' ')}
-                onClick={() => this.addClass}
-              />
-            );
-          }
+        className={className.join(' ')}
+        onClick={() => this.addClass(i)}
+      />
+    );
+  }
         })}
       </div>
     );
