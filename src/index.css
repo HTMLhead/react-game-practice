@@ -1,0 +1,61 @@
+@keyframes shake {
+  30% {
+    transform: scale(0.8, 1.2);
+  }
+  40% {
+    transform: scale(1.2, 0.8);
+  }
+  60% {
+    transform: scale(0.9, 1.1);
+  }
+  80% {
+    transform: scale(1.1, 0.9);
+  }
+}
+.title {
+  font-size: 2rem;
+}
+
+.game-board {
+  position:relative;
+  margin-top: 10rem;
+  text-align: center;
+  z-index:0
+}
+
+.square {
+  position: relative;
+  display: inline-block;
+  border: 0.2rem solid #999;
+  font-size: 1rem;
+  width: 5rem;
+  height: 5rem;
+  margin-right: 1rem;
+  outline: none;
+  text-align: center;
+  background-color:#fff;
+}
+.square:hover {
+  cursor: pointer;
+}
+
+.soom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5rem;
+  height: 4.3rem;
+  background-size: 5rem;
+  background-image: url(./soom-cutout.png);
+  z-index: -1;
+  transition: all 1s ease-out;
+}
+
+.soom-click-ani {
+  top:-4rem;
+}
+
+.square-click-ani {
+  animation: shake 0.5s;
+  background-color: red;
+}
