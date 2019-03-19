@@ -8,5 +8,20 @@ function makeRanBoolArr(num) {
   return randomArr;
 }
 
+function makeSquare(props) {
+  const element = (
+    <div className='square' onClick={this.props.onClick}></div>
+  )
+  return element
+}
+
+function makeSoom(props) {
+  const element = (
+    <div className='square' onClick={this.props.onClick}>
+      <div className='soom'></div>
+    </div>
+  )
+  return element
+}
 
 
