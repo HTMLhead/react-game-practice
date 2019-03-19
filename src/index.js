@@ -31,6 +31,16 @@ class Game extends React.Component {
     };
   }
 
+  clickHandler(i) {
+    const ranArr = this.state.ranArr.slice();
+    if (ranArr[i] === true) return;
+    if (ranArr[i] === 'soom') return;
+    ranArr[i] = true;
+    this.setState({
+      ranArr: ranArr,
+    });
+  }
+  
   renderSoom(i, classList) {
     return (
       <MakeSoom
