@@ -9,14 +9,14 @@ function makeRanArr(num) {
 }
 
 function MakeSquare(props) {
-  const element = <div className="square" onClick={props.onClick} />;
+  const element = <div className={props.className} onClick={props.onClick} />;
   return element;
 }
 
 function MakeSoom(props) {
   const element = (
     <div className="square" onClick={props.onClick}>
-      <div className="soom" />
+      <div className={props.className} />
     </div>
   );
   return element;
@@ -34,14 +34,21 @@ class Game extends React.Component {
   clickHandler(i) {
     const ranArr = this.state.ranArr.slice();
     if (ranArr[i] === true) return;
-    if (ranArr[i] === 'soom') return;
+    if (ranArr[i] === 'soom' || ranArr[i] === 'checked') {
+      ranArr[i] = 'checked'
+      this.setState({
+        ranArr: ranArr
+      })
+      return;
+    }
     ranArr[i] = true;
     this.setState({
       ranArr: ranArr,
     });
   }
-  
+
   renderSoom(i, classList) {
+    if(this.state.ranArr[i] === "checked") classList += ' soom-click-ani'
     return (
       <MakeSoom
         key={i}
@@ -70,8 +77,8 @@ class Game extends React.Component {
         {title}
         <div className="game-board">
           {this.state.ranArr.map((bool, i) => {
-            if (bool === 'soom') {
-              return this.renderSoom(i, classList);
+            if (bool === 'soom' || bool === 'checked') {
+              return this.renderSoom(i, 'soom');
             } else {
               return this.renderSquare(i, classList);
             }
@@ -81,4 +88,5 @@ class Game extends React.Component {
     );
   }
 }
+
 ReactDOM.render(<Game />, document.getElementById('root'));
