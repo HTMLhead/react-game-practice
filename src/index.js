@@ -8,45 +8,62 @@ function makeRanBoolArr(num) {
   return randomArr;
 }
 
-function makeSquare(props) {
-  const element = (
-    <div className='square' onClick={this.props.onClick}></div>
-  )
-  return element
+function MakeSquare(props) {
+  const element = <div className="square" onClick={props.onClick} />;
+  return element;
 }
 
-function makeSoom(props) {
+function MakeSoom(props) {
   const element = (
-    <div className='square' onClick={this.props.onClick}>
-      <div className='soom'></div>
+    <div className="square" onClick={props.onClick}>
+      <div className="soom" />
     </div>
-  )
-  return element
+  );
+  return element;
 }
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {addClass: false}
+    this.state = {
+      addClass: false,
+      ranArr: makeRanBoolArr(7),
+    };
   }
 
   addClass() {
-    this.setState({addClass: true})
+    this.setState({ addClass: true });
   }
 
   render() {
-    let classList = ['square']
-    if(this.state.addClass) {
+    let classList = ['square'];
+    if (this.state.addClass) {
       classList = classList.concat(['square-click-ani']);
     }
-    return(
-      <div className={classList.join(' ')} onClick={this.addClass.bind(this)}></div>
-    )
+    return (
+      <div className="game-board">
+        {this.state.ranArr.map((bool, i) => {
+          if (bool === 'soom') {
+            return (
+              <MakeSoom
+                key={i}
+                className={classList.join(' ')}
+                onClick={() => this.addClass}
+              />
+            );
+          } else {
+            return (
+              <MakeSquare
+                key={i}
+                className={classList.join(' ')}
+                onClick={() => this.addClass}
+              />
+            );
+          }
+        })}
+      </div>
+    );
   }
 }
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-)
-
+ReactDOM.render(<Game />, document.getElementById('root'));
