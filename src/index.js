@@ -27,16 +27,19 @@ class Game extends React.Component {
     super(props);
     this.state = {
       //매직넘버 어떻게 처리?
+      isGameEnd : false,
       ranArr: makeRanArr(7),
     };
   }
 
   clickHandler(i) {
+    if (this.state.isGameEnd) return;
     const ranArr = this.state.ranArr.slice();
     if (ranArr[i] === true) return;
     if (ranArr[i] === 'soom' || ranArr[i] === 'checked') {
       ranArr[i] = 'checked'
       this.setState({
+        isGameEnd : true,
         ranArr: ranArr
       })
       return;
