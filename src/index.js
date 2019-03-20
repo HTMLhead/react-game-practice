@@ -22,6 +22,14 @@ function MakeSoom(props) {
   return element;
 }
 
+function MakeWinner(props) {
+  const element = (
+    <div className={props.className}>{props.log}
+    </div>
+  )
+  return element
+}
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -60,6 +68,18 @@ class Game extends React.Component {
       />
     );
   }
+  
+  renderWinner() {
+    if(this.state.isGameEnd) {
+      return (
+        <MakeWinner
+          log="당신이 당첨되었습니다!"
+          className="winner"
+        />
+      )
+    }
+    return;
+  }
 
   renderSquare(i, classList) {
     if(this.state.ranArr[i] === true) classList += ' square-click-ani';
@@ -71,7 +91,7 @@ class Game extends React.Component {
       />
     );
   }
-
+  
   render() {
     let classList = "square"
     const title = `숨을 찾으면 당첨!`;
@@ -87,6 +107,7 @@ class Game extends React.Component {
             }
           })}
         </div>
+        {this.renderWinner()}
       </div>
     );
   }
